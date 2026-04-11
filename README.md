@@ -55,6 +55,29 @@ Notes:
 - The local virtual environment directory `.venv/` is ignored by git (see .gitignore). Do not commit it.
 - If you prefer a different venv name, adjust the commands or use the `--venv-name` flag for the helper script.
 
+Container helper script
+-----------------------
+If you prefer containers, we provide a helper script that prefers `podman` and falls back to `docker`.
+
+Build and run examples:
+
+```bash
+# Build base image (podman preferred)
+./scripts/container.sh build --tag la4cvdl:dev
+
+# Build heavy image (includes torch/opencv)
+./scripts/container.sh build --heavy --tag la4cvdl:heavy
+
+# Run an interactive shell inside the container
+./scripts/container.sh shell --tag la4cvdl:dev
+
+# Run jupyter lab (exposes port 8888)
+./scripts/container.sh jupyter --port 8888 --tag la4cvdl:dev
+
+# Run Streamlit demo on port 8501
+./scripts/container.sh streamlit --port 8501 --tag la4cvdl:dev
+```
+
 ## Run Demo
 ```bash
 streamlit run app/app.py
