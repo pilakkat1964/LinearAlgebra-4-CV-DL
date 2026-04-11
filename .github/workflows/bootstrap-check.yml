@@ -1,0 +1,33 @@
+name: Bootstrap Check
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Create virtualenv and install base requirements
+        run: |
+          python -m venv .venv
+          . .venv/bin/activate
+          pip install --upgrade pip setuptools wheel
+          pip install -r requirements-base.txt
+
+      - name: Smoke test imports
+        run: |
+          . .venv/bin/activate
+          python -c "import importlib, sys; pkgs=['numpy','scipy','matplotlib','jupyter','sklearn','streamlit'];
+          missing=[p for p in pkgs if importlib.util.find_spec(p) is None];
+          print('MISSING:', missing); sys.exit(bool(missing))"
