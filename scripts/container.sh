@@ -68,10 +68,19 @@ build_image() {
     fi
 
     echo "Building heavy image with tag $TAG"
-    $RUNTIME build --build-arg BUILD_HEAVY=1 -t "$TAG" .
+    # For Docker Buildx and compatibility, use --platform if available to build for linux/amd64
+    if command -v docker >/dev/null 2>&1 && $RUNTIME = "docker"; then
+      $RUNTIME build --platform linux/amd64 --build-arg BUILD_HEAVY=1 -t "$TAG" .
+    else
+      $RUNTIME build --build-arg BUILD_HEAVY=1 -t "$TAG" .
+    fi
   else
     echo "Building base image with tag $TAG"
-    $RUNTIME build -t "$TAG" .
+    if command -v docker >/dev/null 2>&1 && $RUNTIME = "docker"; then
+      $RUNTIME build --platform linux/amd64 -t "$TAG" .
+    else
+      $RUNTIME build -t "$TAG" .
+    fi
   fi
 
   # After building, report image size and warn if it exceeds configured threshold

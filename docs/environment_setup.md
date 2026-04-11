@@ -96,3 +96,7 @@ make shell        # open shell in image
 make jupyter      # run jupyter lab in container
 make streamlit    # run streamlit demo in container
 ```
+
+CI validation
+-------------
+To validate the Dockerfile syntax and a base image build on PRs, the repository includes a lightweight GitHub Actions job (`.github/workflows/docker-build.yml`) which builds the Dockerfile (base image only) using Docker Buildx. This job does not push images but ensures the Dockerfile remains buildable on PRs.

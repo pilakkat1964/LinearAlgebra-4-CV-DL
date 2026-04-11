@@ -1,0 +1,40 @@
+name: Dockerfile Build Validation
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  build-docker:
+    name: Build Dockerfile (base)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU (for cross-platform builds)
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker image (base)
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: false
+          load: true
+          tags: la4cvdl:ci-base
+          build-args: |
+            BUILD_HEAVY=0
+
+      - name: Report image size
+        run: |
+          if docker image inspect la4cvdl:ci-base >/dev/null 2>&1; then
+            docker image inspect la4cvdl:ci-base --format 'Image size: {{.Size}} bytes'
+          else
+            echo 'Image not found after build'
+            exit 1
+          fi
