@@ -1,0 +1,4 @@
+description: Lint Markdown files for common issues
+commands:
+  - name: Lint Markdown files
+    run: python3 tasks/lint.py

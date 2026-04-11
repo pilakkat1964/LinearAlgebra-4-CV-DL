@@ -1,0 +1,4 @@
+description: Convert Markdown to LaTeX and PDF
+commands:
+  - name: Convert Markdown to LaTeX and PDF
+    run: python3 tasks/convert.py

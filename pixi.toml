@@ -1,0 +1,22 @@
+[workspace]
+name = "linear-algebra-workflow"
+version = "0.1.0"
+description = "Automation tasks for Markdown to PDF conversion workflow"
+channels = ["requirements.txt"]
+platforms = ["linux-64"]
+
+[tool.pixi.tasks.markdown_to_pdf]
+description = "Convert Markdown to LaTeX and PDF"
+run = "python3 tasks/convert.py"
+
+[tool.pixi.tasks.watch]
+description = "Watch for Markdown changes and rebuild"
+run = "python3 tasks/watch.py"
+
+[tool.pixi.tasks.test]
+description = "Validate LaTeX files"
+run = "python3 tasks/test.py"
+
+[tool.pixi.tasks.lint]
+description = "Lint Markdown files"
+run = "python3 tasks/lint.py"

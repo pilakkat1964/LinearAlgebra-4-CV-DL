@@ -1,0 +1,4 @@
+description: Watch Markdown files for changes and recompile
+commands:
+  - name: Watch and rebuild on changes
+    run: python3 tasks/watch.py

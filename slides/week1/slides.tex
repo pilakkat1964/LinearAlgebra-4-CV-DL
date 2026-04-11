@@ -1,0 +1,154 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Custom LaTeX preamble for font override
+\usepackage{fontspec}
+\setmainfont{MesloLGL Nerd Font}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{Courier}
+\setmathfont{MesloLGL Nerd Font}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\hypertarget{week-1-slides-introduction-to-linear-algebra}{%
+	\section{Week 1 Slides: Introduction to Linear
+	  Algebra}\label{week-1-slides-introduction-to-linear-algebra}}
+
+\hypertarget{slide-1-linear-algebra-overview}{%
+	\subsection{Slide 1: Linear Algebra
+		Overview}\label{slide-1-linear-algebra-overview}}
+
+\begin{itemize}
+	\tightlist
+	\item
+	      Linear algebra is the mathematics of vectors and matrices.
+	\item
+	      Applications in physics, engineering, data science, and ML.
+	\item
+	      Reference Video:
+	      \href{https://www.youtube.com/watch?v=ZK3O402wf1c}{MIT OCW: Vectors
+		      and Spaces}.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{slide-2-vectors}{%
+	\subsection{Slide 2: Vectors}\label{slide-2-vectors}}
+
+\begin{itemize}
+	\tightlist
+	\item
+	      Scalars: A single number.
+	\item
+	      Vectors: A list of numbers.
+	\item
+	      Example: A 2D vector can be \([x, y]\).
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{slide-3-vector-operations}{%
+	\subsection{Slide 3: Vector
+		Operations}\label{slide-3-vector-operations}}
+
+\begin{itemize}
+	\tightlist
+	\item
+	      Addition: {[}\mathbf{u} + \mathbf{v}
+	      \rightarrow \text{Tip-to-Tail Rule.}{]}
+	\item
+	      Scalar Multiplication: {[}c\cdot \mathbf{v}
+	      \rightarrow \text{Scaling vector magnitude.}{]}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{slide-4-dot-product}{%
+	\subsection{Slide 4: Dot Product}\label{slide-4-dot-product}}
+
+\begin{itemize}
+	\tightlist
+	\item
+	      Formula: {[}\mathbf{u} \cdot \mathbf{v} =
+	      \textbar{}\mathbf{u}\textbar{} \textbar{}\mathbf{v}\textbar{}
+	      \cos\theta{]}
+	\item
+	      Applications:
+
+	      \begin{itemize}
+		      \tightlist
+		      \item
+		            Angle calculations.
+		      \item
+		            Projections.
+	      \end{itemize}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{slide-5-practice}{%
+	\subsection{Slide 5: Practice}\label{slide-5-practice}}
+
+\begin{enumerate}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+	\item
+	      Compute the dot product of ({[}1, 2{]}) and ({[}3, 4{]}).
+	\item
+	      Visualize vector addition for ({[}3,4{]}) and ({[}5,2{]}).
+	\item
+	      Write SageMath code for \(\| \mathbf{v} \|\).
+\end{enumerate}
+
+\end{document}

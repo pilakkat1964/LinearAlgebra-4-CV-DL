@@ -1,0 +1,4 @@
+description: Validate LaTeX files for compilation integrity
+commands:
+  - name: Test LaTeX files
+    run: python3 tasks/test.py

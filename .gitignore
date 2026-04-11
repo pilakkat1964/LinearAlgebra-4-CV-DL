@@ -1,0 +1,21 @@
+# Ignore derived and generated files
+*.log
+*.aux
+*.pdf
+*.bak*
+
+# Cache and temporary directories
+.ipynb_checkpoints/
+.ruff_cache/
+
+# LaTeX build artifacts
+test_latex.*
+week*_slides.*
+
+# Ignore debug, backup, or other temporary files
+*.debug
+*.lock
+
+# Existing rules
+pdfs/
+conversion_errors.log
