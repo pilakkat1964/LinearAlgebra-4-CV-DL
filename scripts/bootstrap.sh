@@ -12,7 +12,7 @@ cd "$HERE"
 # Configurable variables
 VENV_DIR=".venv"
 PY=${PY:-python3}
-REQ_FILE=${REQ_FILE:-requirements.txt}
+REQ_FILE=${REQ_FILE:-requirements-base.txt}
 SKIP_INSTALL=${SKIP_INSTALL:-0}
 
 if [ -d "$VENV_DIR" ]; then
@@ -35,6 +35,12 @@ else
     pip install -r "$REQ_FILE"
   else
     echo "No requirements file found at $REQ_FILE; created venv but did not install additional packages."
+  fi
+
+  # Inform user how to install heavy/optional dependencies
+  if [ "$REQ_FILE" = "requirements-base.txt" ]; then
+    echo "To install optional heavy dependencies (torch, opencv), run:" \
+         "pip install -r requirements-heavy.txt"
   fi
 fi
 

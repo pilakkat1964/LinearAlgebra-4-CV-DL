@@ -1,0 +1,3 @@
+# Heavy / optional deps (large wheels, GPU-enabled packages)
+opencv-python
+torch

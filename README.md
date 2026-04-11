@@ -36,9 +36,14 @@ Q, K, V matrices with scaled dot-product attention.
 
 Recommended (convenience script)
 ```bash
-./scripts/bootstrap.sh    # creates a local .venv and installs requirements
+./scripts/bootstrap.sh    # creates a local .venv and installs requirements-base.txt
 source .venv/bin/activate  # Windows: .venv\Scripts\activate
 jupyter notebook
+```
+
+To add optional heavy dependencies (large binary wheels such as torch or opencv):
+```bash
+pip install -r requirements-heavy.txt
 ```
 
 Alternative (advanced): use the repository environment helper which can use `uv` or fall back to `venv`:
