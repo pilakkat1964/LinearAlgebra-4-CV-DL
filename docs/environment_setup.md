@@ -68,3 +68,19 @@ Troubleshooting and tips
 If you want, I can also:
 - Add a short quickstart snippet to `docs/index.md` linking to this page.
 - Add instructions for a container-based development flow (Docker) if you prefer fully hermetic environments.
+
+Container-based development
+---------------------------
+We provide a simple Dockerfile that creates a Python 3.12-based image, installs the base dependencies, and optionally installs heavy dependencies when built with `--build-arg BUILD_HEAVY=1`.
+
+Build a lightweight development image:
+
+```bash
+docker build -t la4cvdl:base .
+```
+
+Build an image with heavy dependencies (requires more disk and time):
+
+```bash
+docker build --build-arg BUILD_HEAVY=1 -t la4cvdl:heavy .
+```
