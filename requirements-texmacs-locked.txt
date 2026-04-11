@@ -1,0 +1,2 @@
+# TeXmacs itself is not a Python package; we include helper packages that are useful when integrating TeXmacs with Python workflows
+sympy==1.14.0

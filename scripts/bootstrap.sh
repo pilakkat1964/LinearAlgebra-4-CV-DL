@@ -42,6 +42,12 @@ else
     echo "To install optional heavy dependencies (torch, opencv), run:" \
          "pip install -r requirements-heavy.txt"
   fi
+
+  # Optional installs for content tooling
+  echo "If you want Manim (animation toolset) or TeXmacs integration helpers, you can install:
+    pip install -r requirements-manim-locked.txt
+    pip install -r requirements-texmacs-locked.txt
+  "
 fi
 
 echo "Bootstrap complete. Activate with: source $VENV_DIR/bin/activate"

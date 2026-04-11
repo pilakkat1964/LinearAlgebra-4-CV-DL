@@ -50,6 +50,30 @@ Notes about `tools/setup_environment.py`:
 - When `uv` is available it will use `uv python install`/`uv venv` flows (recommended for pinned Python versions).
 - The script maintains a `heavy_dependencies_progress.pkl` file in the install root when installing large GPU packages: this lets it resume partially-completed heavy installs.
 
+Optional content tooling
+------------------------
+If you plan to produce animated content or use TeXmacs for authoring, the following optional tooling can be installed into your environment. They are intentionally kept out of the base requirements to avoid slowing down initial bootstraps.
+
+Manim (Community edition)
+  - Manim is a Python-based animation engine often used for math/visualization content. It requires additional system dependencies for rendering (FFmpeg, Cairo, LaTeX for MathTeX/TeX rendering) in many platforms.
+  - Install Python package (inside venv):
+
+```bash
+pip install -r requirements-manim-locked.txt
+```
+
+TeXmacs integration helpers
+  - GNU TeXmacs is a standalone typesetting system (not a Python package). If you use TeXmacs, install the TeXmacs application via your OS package manager.
+  - The repo provides a small helper requirements file for Python-side helpers (e.g., sympy integration):
+
+```bash
+pip install -r requirements-texmacs-locked.txt
+```
+
+Notes and system deps
+  - Manim may require the following system packages on Debian/Ubuntu: `ffmpeg`, `cairo`, `pango`, `libpango1.0-dev`, `libcairo2`, and a TeX distribution (TeX Live) for rendering TeX math.
+  - TeXmacs should be installed from your OS packages (apt, dnf, brew) or from source; once installed, the Python helpers simply allow programmatic interaction.
+
 CI / automated validation
 -------------------------
 There is a GitHub Actions workflow `.github/workflows/bootstrap-check.yml` that runs on pushes and PRs. It creates a `.venv`, installs `requirements-base.txt`, and performs a smoke-test import of the base packages to ensure the bootstrap flow works in CI.
