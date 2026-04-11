@@ -196,3 +196,28 @@ make streamlit    # run streamlit demo in container
 CI validation
 -------------
 To validate the Dockerfile syntax and a base image build on PRs, the repository includes a lightweight GitHub Actions job (`.github/workflows/docker-build.yml`) which builds the Dockerfile (base image only) using Docker Buildx. This job does not push images but ensures the Dockerfile remains buildable on PRs.
+
+Manim image build workflow
+--------------------------
+A dedicated GitHub Actions workflow was added at `.github/workflows/manim-image-build.yml`. It is intended to detect regressions in the Manim-enabled image (system packages + Python Manim) and runs on a schedule as well as on manual dispatch. Key points:
+
+- Triggers: manual dispatch (`workflow_dispatch`) and a monthly schedule (first day of month, 03:00 UTC).
+- Location: `.github/workflows/manim-image-build.yml` in the repo.
+- What it does: builds the repository Dockerfile with `BUILD_MANIM=1`, loads the resulting image on the runner, and runs a small smoke-test (a `python -c "import manim"` inside the image) to verify Manim imports successfully.
+- Inputs (manual runs):
+  - `image_tag` (optional): specify the image tag to use; defaults to `la4cvdl:manim-<sha>`.
+  - `skip_smoke_test` (optional): set to `true` to skip the import smoke-test during manual dispatch.
+- Behavior: the workflow does not push images to any registry by default; it only builds and validates on the runner. This keeps CI costs bounded and avoids publishing large images without explicit configuration.
+
+How to run manually
+
+From the GitHub UI: Actions → "Manim Image Build & Smoke Test" → Run workflow. You can pass `image_tag` and `skip_smoke_test` as inputs.
+
+Using the GitHub CLI:
+
+```bash
+gh workflow run manim-image-build.yml --ref main \
+  -f image_tag='la4cvdl:manim-test' -f skip_smoke_test='false'
+```
+
+If you later want the workflow to push built images to a registry (GHCR, Docker Hub, etc.), I can update it to push and tag images — that will require adding repository secrets for authentication.
