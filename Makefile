@@ -9,6 +9,9 @@ build:
 build-heavy:
 	./scripts/container.sh build --heavy --tag $(IMAGE)
 
+build-manim:
+	./scripts/container.sh build --manim --tag $(IMAGE)
+
 run:
 	./scripts/container.sh run --tag $(IMAGE) -- bash
 

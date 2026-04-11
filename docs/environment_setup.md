@@ -74,6 +74,78 @@ Notes and system deps
   - Manim may require the following system packages on Debian/Ubuntu: `ffmpeg`, `cairo`, `pango`, `libpango1.0-dev`, `libcairo2`, and a TeX distribution (TeX Live) for rendering TeX math.
   - TeXmacs should be installed from your OS packages (apt, dnf, brew) or from source; once installed, the Python helpers simply allow programmatic interaction.
 
+System package installation examples
+-----------------------------------
+Below are example commands for installing the common system-level dependencies that Manim and TeXmacs require. Package names vary by distribution; these examples are a starting point and include notes about lighter vs. full TeX installs.
+
+Debian / Ubuntu (apt)
+```bash
+# update package lists
+sudo apt update
+# common runtime deps for rendering
+sudo apt install -y ffmpeg libcairo2 libpango-1.0-0 libpangocairo-1.0-0
+# recommended: small LaTeX set (smaller than texlive-full but may require additional packages)
+sudo apt install -y texlive-latex-recommended texlive-latex-extra dvipng
+# If you want a complete TeX distribution (very large):
+# sudo apt install -y texlive-full
+# Install TeXmacs (if desired):
+sudo apt install -y texmacs
+```
+
+Fedora / RHEL (dnf)
+```bash
+# Enable RPM Fusion if you need ffmpeg packages on some Fedora setups
+# sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf install -y ffmpeg cairo pango
+# texlive packages (names / collections may differ):
+sudo dnf install -y texlive-scheme-basic texlive-dvips texlive-collection-latex
+# TeXmacs (if available in your distro's repos):
+sudo dnf install -y texmacs || echo "Please install TeXmacs from your distro or upstream packages"
+```
+
+macOS (Homebrew)
+```bash
+# Install core system deps
+brew install ffmpeg cairo pango pkg-config
+# Install a TeX distribution (MacTeX is large — installs complete TeX Live):
+brew install --cask mactex
+# TeXmacs (may be available as a cask):
+brew install --cask texmacs || echo "If texmacs cask not available, see https://www.texmacs.org for install options"
+```
+
+Notes
+- The minimal TeX packages listed above (texlive-latex-recommended, texlive-latex-extra, dvipng) are enough for many use cases, but complex documents or Manim scenes that render advanced math may require additional LaTeX packages or `texlive-full`.
+- On Fedora, package names and collections vary across releases; consult your distro documentation if the collection names above are not available.
+- After installing system packages, install the Python-side Manim package inside your virtualenv:
+
+```bash
+source .venv/bin/activate
+pip install -r requirements-manim-locked.txt
+```
+
+Install helper script
+---------------------
+To simplify installing the common system-level packages for Manim and TeXmacs, the repository includes a helper script `scripts/install-system-deps.sh` which detects your package manager (apt, dnf, or Homebrew) and runs the appropriate commands. This script is interactive by default and requires `sudo` for package installs.
+
+Example usage:
+
+```bash
+# Preview and interactively install (recommended)
+./scripts/install-system-deps.sh --with-tex
+
+# Non-interactive (use with caution):
+./scripts/install-system-deps.sh --with-tex --yes
+```
+
+Using the official Manim Docker image
+------------------------------------
+If you prefer not to install system packages locally, the Manim community provides official Docker images that include the necessary system dependencies. Example:
+
+```bash
+docker run --rm -it -v "$(pwd):/manim" -w /manim manimcommunity/manim:stable manim -pql example_scenes.py SquareToCircle
+```
+
+
 CI / automated validation
 -------------------------
 There is a GitHub Actions workflow `.github/workflows/bootstrap-check.yml` that runs on pushes and PRs. It creates a `.venv`, installs `requirements-base.txt`, and performs a smoke-test import of the base packages to ensure the bootstrap flow works in CI.

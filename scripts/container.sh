@@ -21,7 +21,7 @@ usage() {
 Usage: $0 <command> [options]
 
 Commands:
-  build [--heavy] [--tag NAME]   Build the image (heavy triggers optional heavy deps)
+  build [--heavy] [--manim] [--tag NAME]   Build the image (heavy triggers optional heavy deps; --manim installs Manim/system deps)
   run [--tag NAME] [--] [CMD]    Run a container and execute CMD (interactive shell by default)
   shell [--tag NAME]             Open an interactive shell in the container
   jupyter [--tag NAME] [--port N]  Run Jupyter Lab and expose port (default 8888)
@@ -36,11 +36,14 @@ USAGE
 
 build_image() {
   local heavy=0
+  local manim=0
+  local force=0
   while [ "$#" -gt 0 ]; do
     case "$1" in
       --heavy) heavy=1; shift ;;
+      --manim) manim=1; shift ;;
       --tag) TAG="$2"; shift 2 ;;
-      --yes|--force|-y) FORCE_HEAVY=1; shift ;;
+      --yes|--force|-y) force=1; shift ;;
       --help) usage; exit 0 ;;
       *) echo "Unknown build option: $1"; usage; exit 1 ;;
     esac
@@ -51,8 +54,8 @@ build_image() {
   IMG_SIZE_WARN_MB=${IMG_SIZE_WARN_MB:-300}
 
   if [ "$heavy" -eq 1 ]; then
-    # Confirm heavy builds interactively unless FORCE_HEAVY or env var set
-    if [ -z "${FORCE_HEAVY:-}" ]; then
+    # Confirm heavy builds interactively unless FORCE or env var set
+    if [ "$force" -eq 0 ]; then
       if [ -t 0 ]; then
         echo "WARNING: Heavy build will include large optional dependencies (torch, opencv) and may take a long time and significant disk space."
         printf "Proceed with heavy build? (y/N): "
@@ -62,21 +65,21 @@ build_image() {
           *) echo "Aborting heavy build"; exit 0 ;;
         esac
       else
-        echo "Non-interactive environment. To force heavy build use --yes or set FORCE_HEAVY=1 in the environment." >&2
+        echo "Non-interactive environment. To force heavy build use --yes or set FORCE=1 in the environment." >&2
         exit 1
       fi
     fi
 
     echo "Building heavy image with tag $TAG"
     # For Docker Buildx and compatibility, use --platform if available to build for linux/amd64
-    if command -v docker >/dev/null 2>&1 && $RUNTIME = "docker"; then
+    if command -v docker >/dev/null 2>&1 && [ "$RUNTIME" = "docker" ]; then
       $RUNTIME build --platform linux/amd64 --build-arg BUILD_HEAVY=1 -t "$TAG" .
     else
       $RUNTIME build --build-arg BUILD_HEAVY=1 -t "$TAG" .
     fi
   else
     echo "Building base image with tag $TAG"
-    if command -v docker >/dev/null 2>&1 && $RUNTIME = "docker"; then
+    if command -v docker >/dev/null 2>&1 && [ "$RUNTIME" = "docker" ]; then
       $RUNTIME build --platform linux/amd64 -t "$TAG" .
     else
       $RUNTIME build -t "$TAG" .
@@ -91,6 +94,43 @@ build_image() {
     echo "Image $TAG size: ${size_mb} MB"
     if [ "$size_mb" -gt "$IMG_SIZE_WARN_MB" ]; then
       echo "WARNING: Image size ${size_mb}MB exceeds warning threshold of ${IMG_SIZE_WARN_MB}MB. Consider using base builds and installing heavy deps separately (requirements-heavy.txt) if you don't need them in the image."
+    fi
+  fi
+
+  # Optional Manim build path: if requested, rebuild with BUILD_MANIM=1 and tag as ${TAG}-manim
+  if [ "$manim" -eq 1 ]; then
+    # Confirm unless forced
+    if [ "$force" -eq 0 ]; then
+      if [ -t 0 ]; then
+        echo "WARNING: Manim image build will install system packages (ffmpeg, cairo, LaTeX subset) and pip packages and may be large."
+        printf "Proceed with Manim image build? (y/N): "
+        read -r ans || ans="n"
+        case "$ans" in
+          [yY]|[yY][eE][sS]) ;;
+          *) echo "Skipping Manim build"; return 0 ;;
+        esac
+      else
+        echo "Non-interactive environment. To force Manim build use --yes or set FORCE=1 in the environment." >&2
+        return 1
+      fi
+    fi
+
+    MANIM_TAG="${TAG}-manim"
+    echo "Building Manim-enabled image with tag ${MANIM_TAG}"
+    if command -v docker >/dev/null 2>&1 && [ "$RUNTIME" = "docker" ]; then
+      $RUNTIME build --platform linux/amd64 --build-arg BUILD_MANIM=1 -t "${MANIM_TAG}" .
+    else
+      $RUNTIME build --build-arg BUILD_MANIM=1 -t "${MANIM_TAG}" .
+    fi
+
+    # Report manim image size
+    size_bytes=$($RUNTIME image inspect --format '{{.Size}}' "${MANIM_TAG}" 2>/dev/null || $RUNTIME image inspect -f '{{.Size}}' "${MANIM_TAG}" 2>/dev/null || echo 0)
+    if [ "$size_bytes" != "0" ]; then
+      size_mb=$(awk "BEGIN {printf \"%.0f\", ${size_bytes}/1024/1024}")
+      echo "Image ${MANIM_TAG} size: ${size_mb} MB"
+      if [ "$size_mb" -gt "$IMG_SIZE_WARN_MB" ]; then
+        echo "WARNING: Manim image size ${size_mb}MB exceeds warning threshold of ${IMG_SIZE_WARN_MB}MB."
+      fi
     fi
   fi
 }
