@@ -33,12 +33,22 @@ Low-rank approximation with quality vs compression trade-offs.
 Q, K, V matrices with scaled dot-product attention.
 
 ## Setup
+
+Recommended (convenience script)
 ```bash
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-pip install -r requirements.txt
+./scripts/bootstrap.sh    # creates a local .venv and installs requirements
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
 jupyter notebook
 ```
+
+Alternative (advanced): use the repository environment helper which can use `uv` or fall back to `venv`:
+```bash
+python3 tools/setup_environment.py --use-venv-fallback --venv-name .venv --non-interactive --install-root .
+```
+
+Notes:
+- The local virtual environment directory `.venv/` is ignored by git (see .gitignore). Do not commit it.
+- If you prefer a different venv name, adjust the commands or use the `--venv-name` flag for the helper script.
 
 ## Run Demo
 ```bash
