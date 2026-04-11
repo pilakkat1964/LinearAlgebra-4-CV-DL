@@ -60,24 +60,24 @@ This document provides an overview of important files and their respective roles
 
 ## **4. Documentation**
 
-1. **`README.md`**:
+1. **[README.md](../README.md)**:
    - High-level project overview, including setup instructions, key features, and usage.
 
-2. **`authoring_process_documentation.md`**:
-   - Provides insights into the project's authoring and contribution process.
+2. **[authoring_process_documentation.md](authoring_process_documentation.md)**:
+    - Provides insights into the project's authoring and contribution process.
 
-3. **`environment_setup.md`**:
-   - Step-by-step guide to installing and configuring the development environment manually (complementary to `setup_environment.py`).
+3. **[environment_setup.md](environment_setup.md)**:
+    - Step-by-step guide to installing and configuring the development environment manually (complementary to `setup_environment.py`).
 
-4. **`SageMathIntegrationPlan.md`**:
-   - Documents the integration of SageMath with JupyterLab for enhanced functionality.
+4. **[SageMathIntegrationPlan.md](SageMathIntegrationPlan.md)**:
+    - Documents the integration of SageMath with JupyterLab for enhanced functionality.
 
 ---
 
 ## **5. Notebooks and Notes**
 
-1. **`notes/`**:
-   - Contains structured lecture notes for 12 modules, organized per week (e.g., `week1/lecture_notes.md`).
+1. **[notes/](../notes/)**:
+   - Contains structured lecture notes for 12 modules, organized per week (e.g., [../notes/week1/lecture_notes.md](../notes/week1/lecture_notes.md)).
 
 2. **`labs/`**:
    - Jupyter notebooks for interactive exercises accompanying lecture notes.

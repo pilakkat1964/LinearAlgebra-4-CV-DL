@@ -29,7 +29,7 @@ Principal Component Analysis (PCA) is a dimensionality reduction technique essen
 
 ---
 
-Explore computational examples in [Week 10 Notebook](../../labs/supplementary_notebooks/week10_pca.ipynb).
+Explore computational examples in [Week 10 Notebook](../../labs/08_svd.ipynb).
 
 ---
 

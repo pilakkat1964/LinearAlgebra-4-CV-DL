@@ -1,5 +1,7 @@
 # Linear Algebra for Computer Vision & Deep Learning 🚀
 
+See the docs/ directory for detailed documentation, tutorials, and developer notes.
+
 ## Overview
 Production-ready portfolio demonstrating:
 - Rigorous theory (MIT 18.06 — Gilbert Strang)
@@ -10,8 +12,15 @@ Production-ready portfolio demonstrating:
 - 12 structured modules (notes/)
 - Jupyter notebooks (labs/)
 - 3 capstone projects (projects/)
-- Streamlit interactive demo (app/)
-- Research-style report (report.md)
+ - Streamlit interactive demo (app/)
+ - Research-style report (docs/report.md)
+
+## Documentation
+Detailed documentation and supplementary notes live in the docs/ directory:
+
+- docs/plan.md — Project enhancement plan and roadmap
+- docs/report.md — Project report and results summary
+
 
 ## Projects
 ### PCA Face Recognition

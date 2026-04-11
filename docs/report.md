@@ -15,3 +15,7 @@ Demonstrates PCA and SVD for dimensionality reduction and representation learnin
 - Face recognition
 - Compression
 - Feature extraction
+
+---
+
+This is the project report. See the repository README and other docs/ files for supplementary material.

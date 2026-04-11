@@ -29,7 +29,7 @@ Eigenvalues and eigenvectors provide insights into the behavior of linear transf
 
 ---
 
-For computational examples, refer to [Week 7 Supplementary Notebook](../../labs/supplementary_notebooks/week7_eigen.ipynb).
+For computational examples, refer to [Week 7 Supplementary Notebook](../../labs/07_eigen.ipynb).
 
 ---
 

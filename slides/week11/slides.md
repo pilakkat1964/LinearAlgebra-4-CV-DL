@@ -31,7 +31,7 @@ A \approx U_k\Sigma_kV_k^T
   \[
 \text{Image, Rating Data, Sparse Matrices.}
 \]
-- Use SageMath in [Week 11 Notebook](../../labs/supplementary_notebooks/week11_svd_image_compression.ipynb).
+ - Use SageMath in [Week 11 Notebook](../../labs/08_svd.ipynb).
 
 ---
 

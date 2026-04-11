@@ -73,7 +73,7 @@ plane.show()
 ```
 
 **Purpose in the Project**:
-- UV was used to visualize transformations like reflections, rotations, and scaling detailed in `week3_matrix_transformations_slides.md`.
+ - UV was used to visualize transformations like reflections, rotations, and scaling detailed in [../slides/week3_matrix_transformations_slides.md](../slides/week3_matrix_transformations_slides.md).
 
 ---
 

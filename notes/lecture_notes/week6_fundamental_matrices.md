@@ -32,7 +32,7 @@ The fundamental matrix arises in Computer Vision in the context of epipolar geom
 
 ---
 
-For detailed hands-on exercises, use the [Week 6 Supplementary Notebook](../labs/supplementary_notebooks/week6_fundamental_matrices.ipynb).
+For detailed hands-on exercises, use the [Week 6 Supplementary Notebook](../../labs/supplementary_notebooks/week6_fundamental_matrices.ipynb).
 
 ---
 

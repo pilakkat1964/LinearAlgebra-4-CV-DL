@@ -13,7 +13,7 @@
 - Examples of subspaces:
   - Lines through the origin.
   - \(\mathbb{R}^3\)
-- Example computations: Use SageMath \(\text{Notebook}\) [Notebook](../../labs/supplementary_notebooks/week5_vector_spaces.ipynb).
+  - Example computations: Use SageMath \(\text{Notebook}\) [Notebook](../../labs/04_vector_spaces.ipynb).
 
 ---
 

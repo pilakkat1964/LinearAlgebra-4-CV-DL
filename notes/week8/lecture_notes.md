@@ -33,7 +33,7 @@ Matrix decompositions are techniques that enable efficient computations and deep
 
 ---
 
-For hands-on practice, refer to [Week 8 Supplementary Notebook](../../labs/supplementary_notebooks/week8_decompositions.ipynb).
+For hands-on practice, refer to [Week 8 Supplementary Notebook](../../labs/08_svd.ipynb).
 
 ---
 

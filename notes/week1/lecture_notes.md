@@ -29,7 +29,7 @@ This week provides a gentle introduction to the fundamental concepts of linear a
 
 ---
 
-For computational examples, refer to [Week 1 Supplementary Notebook](../../labs/supplementary_notebooks/week1_vectors.ipynb).
+For computational examples, refer to [Week 1 Supplementary Notebook](../../labs/01_vectors.ipynb).
 
 ---
 

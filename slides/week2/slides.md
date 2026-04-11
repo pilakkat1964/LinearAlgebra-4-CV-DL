@@ -24,7 +24,7 @@
 ## Slide 3: Row Reduction
 - Row echelon form (REF): Non-zero row pivots.
 - Reduced REF (RREF): 1s as pivot entries.
-- Visual example with SageMath [Notebook](../../labs/supplementary_notebooks/week2_linear_systems.ipynb).
+ - Visual example with SageMath [Notebook](../../labs/02_linear_systems.ipynb).
 
 ---
 

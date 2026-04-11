@@ -14,7 +14,7 @@ This project demonstrates the application of linear algebra concepts in Computer
   - Focused on fundamental operations like vector operations, transformations, eigen decomposition, SVD, and PyTorch usage.
 
 ### 3. Notes Directory (notes/)
-- Markdown files summarizing theoretical modules (`01_module.md` to `12_module.md`).
+- Markdown files summarizing theoretical modules ([../notes/01_module.md](../notes/01_module.md) to [../notes/12_module.md](../notes/12_module.md)).
 
 ### 4. Projects Directory (projects/)
 - Sub-projects applying linear algebra concepts:
@@ -26,7 +26,7 @@ This project demonstrates the application of linear algebra concepts in Computer
 - Virtual environment with dependencies managed via `requirements.txt`.
 
 ### 6. Documentation
-- `README.md` and `report.md` provide project overview and experiment details.
+ - [../README.md](../README.md) and [report.md](report.md) provide project overview and experiment details.
 
 ## Suggestions for Adding Functionality
 
@@ -60,7 +60,7 @@ This project demonstrates the application of linear algebra concepts in Computer
 ---
 
 ### 4. Documentation Improvements
-- Enhance `README.md`:
+ - Enhance [../README.md](../README.md):
   - Add detailed instructions for running code, installing dependencies, and understanding the project objectives.
 - Add comprehensive docstrings and inline comments in Python scripts.
 

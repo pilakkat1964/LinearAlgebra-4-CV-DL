@@ -19,3 +19,5 @@ week*_slides.*
 # Existing rules
 pdfs/
 conversion_errors.log
+out/
+la_project_env/

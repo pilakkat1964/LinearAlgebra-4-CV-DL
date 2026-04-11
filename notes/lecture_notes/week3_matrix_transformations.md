@@ -37,7 +37,7 @@ Matrix transformations are central to understanding the geometry of linear algeb
 ---
 
 ## Examples and Definitions:
-For detailed worked examples, refer to the Week 3 supplementary notebook found [here](../labs/supplementary_notebooks/week3_matrix_transformations.ipynb).
+For detailed worked examples, refer to the Week 3 supplementary notebook found [here](../../labs/supplementary_notebooks/week3_matrix_transformations.ipynb).
 
 ---
 

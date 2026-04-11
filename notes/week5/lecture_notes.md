@@ -32,7 +32,7 @@ Vector spaces and their subspaces are foundational concepts in linear algebra th
 
 ---
 
-For computational examples, see [Week 5 Supplementary Notebook](../../labs/supplementary_notebooks/week5_vector_spaces.ipynb).
+For computational examples, see [Week 5 Supplementary Notebook](../../labs/04_vector_spaces.ipynb).
 
 ---
 

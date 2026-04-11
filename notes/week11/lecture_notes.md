@@ -28,7 +28,7 @@ This week delves deeper into Singular Value Decomposition (SVD) and its key real
 
 ---
 
-Hands-on content available in the [Week 11 Notebook](../../labs/supplementary_notebooks/week11_svd_image_compression.ipynb).
+Hands-on content available in the [Week 11 Notebook](../../labs/08_svd.ipynb).
 
 ---
 

@@ -32,7 +32,7 @@
   x_{2,1} & x_{2,2}
 \end{bmatrix} \to \text{Covariance, Eigenvalues.}
 \]
-- Practice: [Week 10 Notebook](../../labs/supplementary_notebooks/week10_pca.ipynb).
+ - Practice: [Week 10 Notebook](../../labs/08_svd.ipynb).
 
 ---
 

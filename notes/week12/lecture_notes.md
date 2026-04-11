@@ -28,7 +28,7 @@ In this final week, we explore how linear algebra concepts underpin the design a
 
 ---
 
-Refer to [Week 12 Notebook](../../labs/supplementary_notebooks/week12_pytorch.ipynb) for hands-on exercises.
+Refer to [Week 12 Notebook](../../labs/12_pytorch.ipynb) for hands-on exercises.
 
 ---
 

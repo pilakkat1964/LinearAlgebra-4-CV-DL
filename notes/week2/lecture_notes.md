@@ -33,7 +33,7 @@ This week focuses on solving systems of linear equations, a cornerstone of linea
 
 ---
 
-For computational examples, refer to [Week 2 Supplementary Notebook](../../labs/supplementary_notebooks/week2_linear_systems.ipynb).
+For computational examples, refer to [Week 2 Supplementary Notebook](../../labs/02_linear_systems.ipynb).
 
 ---
 

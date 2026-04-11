@@ -31,7 +31,7 @@ x_{n+1} = x_n - \alpha \nabla f(x_n).
 ---
 
 ## Slide 4: SageMath Practice
-- Use [Week 9 Notebook](../../labs/supplementary_notebooks/week9_gradient_descent.ipynb).
+ - Use [Week 9 Notebook](../../labs/supplementary_notebooks/week9_gradient_descent.ipynb).
 - Example:
   - Compute and visualize convergence for \(f(x, y) = x^2 + y^2\).
 

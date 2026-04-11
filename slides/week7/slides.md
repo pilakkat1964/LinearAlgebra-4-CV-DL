@@ -25,7 +25,7 @@
 ---
 
 ## Slide 4: Practical Calculation
-- Use [Week 7 Notebook](../../labs/supplementary_notebooks/week7_eigen.ipynb).
+ - Use [Week 7 Notebook](../../labs/07_eigen.ipynb).
 - SageMath computation example:
 $$
 \[A = \begin{bmatrix} 4 & 1 \\ 2 & 3 \end{bmatrix} \to \text{Eigenvalues, Eigenvectors.}\]

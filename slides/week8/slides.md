@@ -34,7 +34,7 @@ A = LU.
 A = \begin{bmatrix} 1 & 2 \\
 3 & 4 \end{bmatrix} \to QR.
 \]
-- Verification using SageMath in [Week 8 Notebook](../../labs/supplementary_notebooks/week8_decompositions.ipynb).
+  - Verification using SageMath in [Week 8 Notebook](../../labs/08_svd.ipynb).
 
 ---
 

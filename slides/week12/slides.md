@@ -37,4 +37,4 @@ Y = f(WX + b).
 
 ## Slide 5: Practice Examples
 1. Implement forward and backpropagation for \(Y = WX + b\).
-2. Visualize parameter updates over training iterations using PyTorch in [Week 12 Notebook](../../labs/supplementary_notebooks/week12_pytorch.ipynb).
+2. Visualize parameter updates over training iterations using PyTorch in [Week 12 Notebook](../../labs/12_pytorch.ipynb).
