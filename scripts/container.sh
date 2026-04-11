@@ -40,18 +40,49 @@ build_image() {
     case "$1" in
       --heavy) heavy=1; shift ;;
       --tag) TAG="$2"; shift 2 ;;
+      --yes|--force|-y) FORCE_HEAVY=1; shift ;;
       --help) usage; exit 0 ;;
       *) echo "Unknown build option: $1"; usage; exit 1 ;;
     esac
   done
 
   echo "Using runtime: $RUNTIME"
+  # Default threshold for warning (MB)
+  IMG_SIZE_WARN_MB=${IMG_SIZE_WARN_MB:-300}
+
   if [ "$heavy" -eq 1 ]; then
+    # Confirm heavy builds interactively unless FORCE_HEAVY or env var set
+    if [ -z "${FORCE_HEAVY:-}" ]; then
+      if [ -t 0 ]; then
+        echo "WARNING: Heavy build will include large optional dependencies (torch, opencv) and may take a long time and significant disk space."
+        printf "Proceed with heavy build? (y/N): "
+        read -r ans || ans="n"
+        case "$ans" in
+          [yY]|[yY][eE][sS]) ;;
+          *) echo "Aborting heavy build"; exit 0 ;;
+        esac
+      else
+        echo "Non-interactive environment. To force heavy build use --yes or set FORCE_HEAVY=1 in the environment." >&2
+        exit 1
+      fi
+    fi
+
     echo "Building heavy image with tag $TAG"
     $RUNTIME build --build-arg BUILD_HEAVY=1 -t "$TAG" .
   else
     echo "Building base image with tag $TAG"
     $RUNTIME build -t "$TAG" .
+  fi
+
+  # After building, report image size and warn if it exceeds configured threshold
+  # Try a couple formats for docker/podman inspect
+  size_bytes=$($RUNTIME image inspect --format '{{.Size}}' "$TAG" 2>/dev/null || $RUNTIME image inspect -f '{{.Size}}' "$TAG" 2>/dev/null || echo 0)
+  if [ "$size_bytes" != "0" ]; then
+    size_mb=$(awk "BEGIN {printf \"%.0f\", ${size_bytes}/1024/1024}")
+    echo "Image $TAG size: ${size_mb} MB"
+    if [ "$size_mb" -gt "$IMG_SIZE_WARN_MB" ]; then
+      echo "WARNING: Image size ${size_mb}MB exceeds warning threshold of ${IMG_SIZE_WARN_MB}MB. Consider using base builds and installing heavy deps separately (requirements-heavy.txt) if you don't need them in the image."
+    fi
   fi
 }
 

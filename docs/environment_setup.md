@@ -84,3 +84,15 @@ Build an image with heavy dependencies (requires more disk and time):
 ```bash
 docker build --build-arg BUILD_HEAVY=1 -t la4cvdl:heavy .
 ```
+
+Makefile helper
+---------------
+You can use the repository Makefile as a convenience wrapper around the container helper script:
+
+```bash
+make build        # build base image
+make build-heavy  # build heavy image (large)
+make shell        # open shell in image
+make jupyter      # run jupyter lab in container
+make streamlit    # run streamlit demo in container
+```
