@@ -1,12 +1,19 @@
 #!/usr/bin/env bash
 # Lightweight bootstrap script to create a local .venv and install requirements
+# Usage:
+#   ./scripts/bootstrap.sh            # creates .venv and installs requirements.txt
+#   REQ_FILE=/path/to/reqs.txt ./scripts/bootstrap.sh  # install from alternate file
+#   SKIP_INSTALL=1 ./scripts/bootstrap.sh  # create venv but skip pip install
 set -euo pipefail
 
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$HERE"
 
+# Configurable variables
 VENV_DIR=".venv"
 PY=${PY:-python3}
+REQ_FILE=${REQ_FILE:-requirements.txt}
+SKIP_INSTALL=${SKIP_INSTALL:-0}
 
 if [ -d "$VENV_DIR" ]; then
   echo ".venv already exists at $VENV_DIR"
@@ -15,14 +22,20 @@ else
   "$PY" -m venv "$VENV_DIR"
 fi
 
-echo "Activating virtualenv and installing requirements (if present)"
+echo "Activating virtualenv"
 # shellcheck disable=SC1090
 source "$VENV_DIR/bin/activate"
-if [ -f requirements.txt ]; then
-  pip install --upgrade pip setuptools wheel
-  pip install -r requirements.txt
+
+if [ "$SKIP_INSTALL" = "1" ]; then
+  echo "SKIP_INSTALL=1; skipping pip install step. Use REQ_FILE to override requirements file."
 else
-  echo "No requirements.txt found; created venv but did not install additional packages."
+  if [ -f "$REQ_FILE" ]; then
+    echo "Installing from $REQ_FILE"
+    pip install --upgrade pip setuptools wheel
+    pip install -r "$REQ_FILE"
+  else
+    echo "No requirements file found at $REQ_FILE; created venv but did not install additional packages."
+  fi
 fi
 
 echo "Bootstrap complete. Activate with: source $VENV_DIR/bin/activate"
