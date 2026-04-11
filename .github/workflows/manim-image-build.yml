@@ -1,0 +1,69 @@
+name: Manim Image Build & Smoke Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: 'Optional image tag (default: la4cvdl:manim-${{ github.sha }})'
+        required: false
+        default: ''
+      skip_smoke_test:
+        description: 'Set to "true" to skip the smoke-test step (manual dispatch only)'
+        required: false
+        default: 'false'
+  # Monthly scheduled run (UTC): 03:00 on the first day of each month
+  schedule:
+    - cron: '0 3 1 * *'
+
+concurrency:
+  group: manim-image-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    name: Build Manim Image and Smoke Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    env:
+      IMAGE_TAG: ${{ github.event.inputs.image_tag || format('la4cvdl:manim-{0}', github.sha) }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Runner info
+        run: |
+          uname -a
+          docker --version || true
+
+      - name: Set up QEMU (for cross-platform builds)
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build Manim-enabled image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile
+          push: false
+          load: true
+          platforms: linux/amd64
+          tags: ${{ env.IMAGE_TAG }}
+          build-args: |
+            BUILD_MANIM=1
+
+      - name: Show built image info
+        run: |
+          echo "IMAGE_TAG=$IMAGE_TAG"
+          docker image ls "$IMAGE_TAG" || docker image ls | sed -n '1,50p'
+          docker image inspect "$IMAGE_TAG" --format 'Size: {{.Size}}' || true
+
+      - name: Manim smoke test (import inside image)
+        if: ${{ !(github.event_name == 'workflow_dispatch' && github.event.inputs.skip_smoke_test == 'true') }}
+        run: |
+          echo "Running smoke test in image $IMAGE_TAG"
+          # Run a simple import inside the image; the image includes system deps when built with BUILD_MANIM=1
+          docker run --rm "$IMAGE_TAG" python -c "import manim; print('manim', manim.__version__)"
+          echo "Smoke test completed successfully."
