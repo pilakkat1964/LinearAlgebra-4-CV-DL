@@ -1,0 +1,49 @@
+baseurl: /LinearAlgebra-4-CV-DL
+theme: jekyll-theme-architect
+title: Linear Algebra for Computer Vision & Deep Learning
+description: "Comprehensive linear algebra utilities and educational resources for computer vision and deep learning"
+show_downloads: true
+github:
+  repository_url: https://github.com/pilakkat1964/LinearAlgebra-4-CV-DL
+  owner_name: pilakkat1964
+  owner_url: https://github.com/pilakkat1964
+plugins:
+- jekyll-feed
+- jekyll-relative-links
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+permalink: /:title/
+defaults:
+- scope:
+    path: ''
+  values:
+    layout: default
+relative_links:
+  collections: true
+keep_files:
+- .git
+- .github
+exclude:
+- Makefile
+- .gitignore
+- .github
+- README.md
+- pixi.toml
+- Dockerfile
+- auto_compile.py
+- convert_slides_to_pdf.py
+- convert_slides_to_pdf.sh
+- header.tex
+- preamble.tex
+- labs/
+- notes/
+- projects/
+- app/
+- out/
+
+# Site Hierarchy Navigation
+hierarchy_level: 2
+hierarchy_parent_url: /misc-project
+hierarchy_parent_title: "Miscellaneous Projects Portfolio"
