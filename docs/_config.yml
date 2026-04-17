@@ -42,6 +42,7 @@ exclude:
 - projects/
 - app/
 - out/
+- vendor/
 
 # Site Hierarchy Navigation
 hierarchy_level: 2
