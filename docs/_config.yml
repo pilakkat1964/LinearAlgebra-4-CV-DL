@@ -3,6 +3,7 @@ theme: jekyll-theme-architect
 title: Linear Algebra for Computer Vision & Deep Learning
 description: "Comprehensive linear algebra utilities and educational resources for computer vision and deep learning"
 show_downloads: true
+repository: pilakkat1964/LinearAlgebra-4-CV-DL
 github:
   repository_url: https://github.com/pilakkat1964/LinearAlgebra-4-CV-DL
   owner_name: pilakkat1964
